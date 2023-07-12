@@ -1,0 +1,15 @@
+1. thêm các file css, js, img... vào folder public 
+2. tạo 1 folder pages nơi chứa các trang của website
+    2.1 thêm code của các phần chung của website như menu, banner footer side bar vào trang welcom.blase.php
+    2.2 Tạo mới trang chủ đặt tên home.blade.php và lưu code của từng trang
+        - tại mỗi trang riêng cần phải 
+        @extends('welcome')
+        @section('content')
+        ----nội dung trang web---
+        @endsection
+3. tạo file controller tại app/http/controller
+câu lệnh tạo controler : php artisan make:controller tencontrol
+4. tạo trang admin tương tự như trên
+5. tạo cơ sở dữ liệu
+câu lệnh tạo csdl: php artisan make:migration tenfilecsdl --create=tbl_admin
+câu lệnh : php artisan migrate để tạo bảng
