@@ -10,6 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<title>Admin</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 	<script type="application/x-javascript">
@@ -115,7 +116,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="sub">
 								<li><a href="{{URL::to('/add-category-product')}}">Thêm danh mục sản phẩm </a></li>
 								<li><a href="{{URL::to('/all-category-product')}}">Danh mục sản phẩm</a></li>
-								<li><a href="#">Quản lý khuyến mãi</a></li>
+								
+							</ul>
+						</li>
+						<li class="sub-menu">
+							<a href="javascript:;">
+							<i class="fa-sharp fa-solid fa-copyright"></i>
+								<span>Thương hiệu sản phẩm</span>
+							</a>
+							<ul class="sub">
+								<li><a href="{{URL::to('/add-brand-product')}}">Thêm thương hiệu</a></li>
+								<li><a href="{{URL::to('/all-brand-product')}}">Thương hiệu sản phẩm</a></li>
+								
 							</ul>
 						</li>
 

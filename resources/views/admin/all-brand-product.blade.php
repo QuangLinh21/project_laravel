@@ -3,7 +3,7 @@
 <div class="table-agile-info">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Danh mục sản phẩm
+            Danh mục thương hiệu
         </div>
         <div class="row w3-res-tb">
             <div class="col-sm-5 m-b-xs">
@@ -46,36 +46,36 @@
                                 <input type="checkbox"><i></i>
                             </label>
                         </th>
-                        <th>Tên danh mục</th>
+                        <th>Tên thương hiệu</th>
                         <th>Hiển thị</th>
                         <th>Mô tả</th>
                         <th colspan="2">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($all_category as $key=>$cate_pro)
+                    @foreach($all_brand as $key=>$brand_pro)
                     <tr>
                         <td><label class="i-checks m-b-none"><input type="checkbox"><i></i></label></td>
-                        <td>{{$cate_pro->category_name}}</td>
-                        <td>{{$cate_pro->category_desc}}</td>
+                        <td>{{$brand_pro->brand_name}}</td>
+                        <td>{{$brand_pro->brand_desc}}</td>
                         <td>
                             <?php
-                            if ($cate_pro->category_status == 0) {
+                            if ($brand_pro->brand_status == 0) {
                             ?>
-                                <a href="{{URL::to('/unactive-category/'.$cate_pro->category_id)}}" class="text-success ">Ẩn</a>
+                                <a href="{{URL::to('/unactive-brand/'.$brand_pro->brand_id)}}" class="text-success ">Ẩn</a>
                             <?php
                             } else {
                             ?>
-                                <a href="{{URL::to('/active-category/'.$cate_pro->category_id)}}" class="text-warning ">Hiển Thị</a>
+                                <a href="{{URL::to('/active-brand/'.$brand_pro->brand_id)}}" class="text-warning ">Hiển Thị</a>
                             <?php
                             }
                             ?>
                         </td>
                         <td>
-                            <a href="{{URL::to('edit-category-product/'.$cate_pro->category_id)}}" class="active" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i></a>
+                            <a href="{{URL::to('edit-brand-product/'.$brand_pro->brand_id)}}" class="active" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i></a>
                         </td>
                         <td>
-                            <a href="{{URL::to('delete-category-product/'.$cate_pro->category_id)}}" class="active" ui-toggle-class="" onclick="return confirm('Bạn có muốn xóa danh mục này không?')"><i class="fa fa-times text-danger text"></i></a>
+                            <a href="{{URL::to('delete-brand-product/'.$brand_pro->brand_id)}}" class="active" ui-toggle-class="" onclick="return confirm('Bạn có muốn xóa danh mục này không?')"><i class="fa fa-times text-danger text"></i></a>
                         </td>
                     </tr>
                     @endforeach
