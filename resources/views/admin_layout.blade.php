@@ -5,7 +5,6 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-
 <head>
 	<title>Admin</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,14 +69,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<img alt="" src=" {{('../public/backend/images/2.png')}}">
 							<span class="username">
 								<?php
-
 								use Illuminate\Support\Facades\Session;
 								$admin_name = 	Session::get('admin_name');
 								if ($admin_name) {
 									echo $admin_name;
-									
 								}
-
 								?>
 							</span>
 							<b class="caret"></b>
@@ -107,7 +103,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<span>Dashboard</span>
 							</a>
 						</li>
+						<li class="sub-menu">
+							<a href="javascript:;">
+								<i class="fa-brands fa-product-hunt"></i>
+								<span>Sản phẩm</span>
+							</a>
+							<ul class="sub">
+								<li><a href="{{URL::to('/add-product')}}">Thêm sản phẩm</a></li>
+								<li><a href="{{URL::to('/all-product')}}">Danh sách sản phẩm</a></li>
 
+							</ul>
+						</li>
 						<li class="sub-menu">
 							<a href="javascript:;">
 								<i class="fa fa-book"></i>
@@ -116,18 +122,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="sub">
 								<li><a href="{{URL::to('/add-category-product')}}">Thêm danh mục sản phẩm </a></li>
 								<li><a href="{{URL::to('/all-category-product')}}">Danh mục sản phẩm</a></li>
-								
+
 							</ul>
 						</li>
 						<li class="sub-menu">
 							<a href="javascript:;">
-							<i class="fa-sharp fa-solid fa-copyright"></i>
+								<i class="fa-sharp fa-solid fa-copyright"></i>
 								<span>Thương hiệu sản phẩm</span>
 							</a>
 							<ul class="sub">
 								<li><a href="{{URL::to('/add-brand-product')}}">Thêm thương hiệu</a></li>
 								<li><a href="{{URL::to('/all-brand-product')}}">Thương hiệu sản phẩm</a></li>
-								
+
 							</ul>
 						</li>
 

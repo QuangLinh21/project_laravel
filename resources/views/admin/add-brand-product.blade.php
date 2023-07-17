@@ -8,19 +8,22 @@
             </header>
             <div class="panel-body">
                 <div class="position-center">
+                    <?php
+
+                    use Illuminate\Support\Facades\Session;
+
+                    $message =     Session::get('message');
+                    if ($message) {
+                        echo '<p class="text-center text-danger">', $message . '</p>';
+                        Session::put('message', null);
+                    }
+
+                    ?>
                     <form role="form" action="{{URL::to('/save-brand-product')}}" method="post">
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục</label>
-                            <?php
-                            use Illuminate\Support\Facades\Session;
-                            $message =     Session::get('message');
-                            if ($message) {
-                                echo '<p class="text-center text-danger">', $message . '</p>';
-                                Session::put('message', null);
-                            }
 
-                            ?>
                             <input type="text" class="form-control" name="brand_product_name" id="exampleInputEmail1" placeholder="Tên thương hiệu">
                         </div>
                         <div class="form-group">

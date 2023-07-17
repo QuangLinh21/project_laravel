@@ -11,15 +11,27 @@ session_start();
 
 class BrandProduct extends Controller
 {
+    public function check_login(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }
+        else{
+           return Redirect::to('admin')->send();
+        }
+    }
     public function add_brand(){
+        $this->check_login();
         return view('admin.add-brand-product');
     }
     public function all_brand(){
+        $this->check_login();
         $all_brand = DB::table('tbl_brand')->get();
         $manager_brand = view('admin.all-brand-product')->with('all_brand',$all_brand);
         return view('admin_layout')->with('all-brand-product',$manager_brand);
     }
     public function save_brand(Request $request){
+        $this->check_login();
         $data=array();
         $data['brand_name']=$request->brand_product_name;
         $data['brand_desc']=$request->brand_product_desc;
@@ -30,29 +42,34 @@ class BrandProduct extends Controller
         return Redirect::to('/add-brand-product');
     }
     public function unactive_brand($brand_id){
+        $this->check_login();
         DB::table('tbl_brand')->where('brand_id',$brand_id)->update(['brand_status'=>1]);
         Session::put('message','Kích hoạt trạng thái thành công');
         return Redirect::to('all-brand-product');
     }
     public function active_brand($brand_id){
+        $this->check_login();
         DB::table('tbl_brand')->where('brand_id',$brand_id)->update(['brand_status'=>0]);
         Session::put('message','Kích hoạt trạng thái thành công');
         return Redirect::to('all-brand-product');
     }
-    public function edit_category($category_id){
-        $edit_category = DB::table('tbl_category_product')->where('category_id',$category_id)->get();//get() lấy theo id
-        $manager_category = view('admin.edit-category-product')->with('edit_category',$edit_category);
-        return view('admin_layout')->with('admin.edit-category-product',$manager_category);
+    public function edit_brand($brand_id){
+        $this->check_login();
+        $edit_brand = DB::table('tbl_brand')->where('brand_id',$brand_id)->get();
+        $manager_brand = view('admin.edit-brand-product')->with('edit_brand',$edit_brand);
+        return view('admin_layout')->with('admin.edit-brand-product',$manager_brand);
     }
-    public function update_category(Request $request,$category_id){
+    public function update_brand(Request $request,$brand_id){
+        $this->check_login();
         $data=array();
-        $data['category_name']=$request->category_product_name;
-        $data['category_desc']=$request->category_product_desc;
-        DB::table('tbl_category_product')->where('category_id',$category_id)->update($data);
-        return Redirect::to('all-category-product');
+        $data['brand_name']=$request->brand_product_name;
+        $data['brand_desc']=$request->brand_product_desc;
+        DB::table('tbl_brand')->where('brand_id',$brand_id)->update($data);
+        return Redirect::to('all-brand-product');
     }
-    public function remove_category($category_id){
-        DB::table('tbl_category_product')->where('category_id',$category_id)->delete();
-        return Redirect::to('all-category-product');
+    public function remove_brand($brand_id){
+        $this->check_login();
+        DB::table('tbl_brand')->where('brand_id',$brand_id)->delete();
+        return Redirect::to('all-brand-product');
     }
 }
