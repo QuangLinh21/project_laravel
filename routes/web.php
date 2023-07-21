@@ -17,6 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\Homecontroller@index');
 Route::get('/trang-chu', 'App\Http\Controllers\Homecontroller@index');
 
+//danh mục sp trang chủ
+Route::get('/category-product-user/{category_id}', 'App\Http\Controllers\CategoryProduct@show_category_user');
+
+//thương hiệu sản phẩm
+Route::get('/brand-product-user/{category_id}', 'App\Http\Controllers\BrandProduct@show_brand_user');
+//chi tiet sp
+Route::get('/product-details/{product_id}', 'App\Http\Controllers\ProductController@product_details');
+//add-to cart
+Route::post('/save-cart', 'App\Http\Controllers\CartController@add_to_cart');
+Route::get('/cart-product', 'App\Http\Controllers\CartController@show_cart');
+Route::get('/delete-to-cart/{rowId}', 'App\Http\Controllers\CartController@delete_to_cart');
+Route::post('/update-cart-quantity', 'App\Http\Controllers\CartController@update_cart_quantity');
 //backend 
 Route::get('/admin', 'App\Http\Controllers\Admincontroller@index');
 Route::get('/dashboard', 'App\Http\Controllers\Admincontroller@show_dashboard');

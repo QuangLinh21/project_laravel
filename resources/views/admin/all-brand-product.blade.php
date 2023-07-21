@@ -62,11 +62,11 @@
                             <?php
                             if ($brand_pro->brand_status == 0) {
                             ?>
-                                <a href="{{URL::to('/unactive-brand/'.$brand_pro->brand_id)}}" class="text-success ">Ẩn</a>
+                                <a href="{{URL::to('unactive-brand/'.$brand_pro->brand_id)}}" class="text-success ">Ẩn</a>
                             <?php
                             } else {
                             ?>
-                                <a href="{{URL::to('/active-brand/'.$brand_pro->brand_id)}}" class="text-warning ">Hiển Thị</a>
+                                <a href="{{URL::to('active-brand/'.$brand_pro->brand_id)}}" class="text-warning ">Hiển Thị</a>
                             <?php
                             }
                             ?>

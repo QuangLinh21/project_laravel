@@ -72,4 +72,12 @@ class BrandProduct extends Controller
         DB::table('tbl_brand')->where('brand_id',$brand_id)->delete();
         return Redirect::to('all-brand-product');
     }
+    //end function admin 
+    public function show_brand_user($brand_id){
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $brand_by_id=DB::table('tbl_products')->join('tbl_brand','tbl_products.brand_id','=','tbl_brand.brand_id')->where('tbl_products.brand_id',$brand_id)->get();
+        $brand_name = DB::table('tbl_brand')->where('tbl_brand.brand_id',$brand_id)->limit(1)->get();
+        return view('pages.category_brand.brand-product-user')->with('category',$cate_product)->with('brand',$brand_product)->with('brand_by_id',$brand_by_id)->with('brand_name',$brand_name);
+    }
 }

@@ -70,4 +70,14 @@ class CategoryProduct extends Controller
         DB::table('tbl_category_product')->where('category_id',$category_id)->delete();
         return Redirect::to('all-category-product');
     }
+
+    //end function admin 
+    public function show_category_user($category_id){
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $category_by_id=DB::table('tbl_products')->join('tbl_category_product','tbl_products.category_id','=','tbl_category_product.category_id')->where('tbl_products.category_id',$category_id)->get();
+        $category_name = DB::table('tbl_category_product')->where('tbl_category_product.category_id',$category_id)->limit(1)->get();
+        return view('pages.category_brand.category-product-user')->with('category',$cate_product)->with('brand',$brand_product)->with('category_by_id',$category_by_id)->with('category_name',$category_name);
+    }
+   
 }

@@ -72,11 +72,11 @@
                             <?php
                             if ($product->product_status == 0) {
                             ?>
-                                <a href="{{URL::to('/unactive-product/'.$product->product_id)}}" class="text-success ">Ẩn</a>
+                                <a href="{{URL::to('unactive-product/'.$product->product_id)}}" class="text-success ">Ẩn</a>
                             <?php
                             } else {
                             ?>
-                                <a href="{{URL::to('/active-product/'.$product->product_id)}}" class="text-warning ">Hiển Thị</a>
+                                <a href="{{URL::to('active-product/'.$product->product_id)}}" class="text-warning ">Hiển Thị</a>
                             <?php
                             }
                             ?>

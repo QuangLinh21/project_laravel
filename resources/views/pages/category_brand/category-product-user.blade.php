@@ -2,15 +2,15 @@
 @section('content')
 
 <div class="features_items">
-    <h2 class="title text-center">SẢN PHẨM MỚI NHẤT</h2>
-    @foreach ($all_product as $key=>$item)
-        
-    
+    @foreach ($category_name as $key=>$item)
+    <h2 class="title text-center">{{$item->category_name}}</h2>
+    @endforeach
+    @foreach ($category_by_id as $key=>$item)
     <div class="col-sm-4">
-        <div class="product-image-wrapper" >
-            <div class="single-products "  >
+        <div class="product-image-wrapper">
+            <div class="single-products" >
                 <div class="productinfo text-center" >
-                    <img src="{{URL::to('../public/uploads/product/'.$item->product_image)}}" width="190px" height="260px" alt="" />
+                    <img src="{{URL::to('../public/uploads/product/'.$item->product_image)}}" width="200px" height="260px" alt="" />
                     <h2>{{ number_format($item->product_price).' '.'VND' }}</h2>
                     <p>
                         {{$item->product_name}}  </p>

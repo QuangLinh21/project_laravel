@@ -108,4 +108,18 @@ class ProductController extends Controller
         Session::put('message','Kích hoạt trạng thái thành công');
         return Redirect::to('all-product');
     }
+    //end admin 
+    public function product_details($product_id){
+        $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->orderby('brand_id','desc')->get();
+        $details_product = DB::table('tbl_products')
+        ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_products.category_id')
+        ->join('tbl_brand','tbl_brand.brand_id','=','tbl_products.brand_id')->where('tbl_products.product_id',$product_id)->get();
+        foreach($details_product as $key=>$value)
+        $brand_id=$value->brand_id;
+        $related_product = DB::table('tbl_products')
+        ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_products.category_id')
+        ->join('tbl_brand','tbl_brand.brand_id','=','tbl_products.brand_id')->where('tbl_brand.brand_id',$brand_id)->whereNotIn('tbl_products.product_id',[$product_id])->get();
+        return view('pages.products.product-details')->with('category',$cate_product)->with('brand',$brand_product)->with('product_details',$details_product)->with('related',$related_product);
+    }
 }
