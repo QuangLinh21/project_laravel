@@ -1,3 +1,4 @@
+*Tạo folder chứa project laravel framework: composer create-project laravel/laravel tenfolderlaravel
 1. thêm các file css, js, img... vào folder public 
 2. tạo 1 folder pages nơi chứa các trang của website
     2.1 thêm code của các phần chung của website như menu, banner footer side bar vào trang welcom.blase.php
@@ -13,3 +14,5 @@ câu lệnh tạo controler : php artisan make:controller tencontrol
 5. tạo cơ sở dữ liệu
 câu lệnh tạo csdl: php artisan make:migration tenfilecsdl --create=tbl_admin
 câu lệnh : php artisan migrate để tạo bảng
+câu leennhj quay lại:  php artisan migrate:rollback
+

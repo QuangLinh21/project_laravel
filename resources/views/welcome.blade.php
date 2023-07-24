@@ -25,6 +25,7 @@
 </head><!--/head-->
 
 <body>
+	
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -86,11 +87,34 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href=""><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li>
+								<?php
+									$customer_id = Session::get('customer_id');
+									$shipping_id = Session::get('shipping_id');
+									if($customer_id==null){
+										?>
+									<li><a href="{{URL::to('login-checkout')}}"><i class="fa fa-lock"></i>Thanh toán</a></li>
+									<?php
+									} else {
+									?>
+										<li><a href="{{URL::to('end-payment')}}"><i class="fa fa-crosshairs"></i>Thanh toán</a></li>
+									<?php
+									}
+									?>
+								
+								<li><a href="{{URL::to('cart-product')}}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+								<?php
+									$customer_id = Session::get('customer_id');
+									if($customer_id==null){
+										?>
+									<li><a href="{{URL::to('login-checkout')}}"><i class="fa fa-lock"></i>Đăng nhập</a></li>
+									<?php
+									} else {
+									?>
+										<li><a href="{{URL::to('checkout')}}"><i class="fa fa-lock"></i>Đăng xuất</a></li>
+									<?php
+									}
+									?>
 							</ul>
 						</div>
 					</div>
@@ -134,7 +158,11 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<form action="{{URL::to('search')}}" method="POST">
+								{{ csrf_field() }}
+								<input type="text" name="keyword_product" placeholder="Tìm kiếm ..."/>
+								<input type="submit" class="btn btn-primary btn-sm" style="width:80px; margin-top:0px; color:black" value="Tìm kiếm">
+							</form>
 						</div>
 					</div>
 				</div>

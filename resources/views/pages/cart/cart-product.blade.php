@@ -4,7 +4,7 @@
     <div>
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-              <li><a href="#">Trang chủ</a></li>
+              <li><a href="{{URL::to('trang-chu')}}">Trang chủ</a></li>
               <li class="active">Giỏ hàng</li>
             </ol>
         </div>
@@ -52,8 +52,8 @@
                         <td class="cart_total">
                             <p class="cart_total_price">
                                 <?php
-                                    $subtotal = $v_content->price * $v_content->qty;
-                                    echo number_format($subtotal).''.'VND';
+                                    $priceTotal = $v_content->price * $v_content->qty;
+                                    echo number_format($priceTotal).''.'VND';
                                 ?>
                             </p>
                         </td>
@@ -129,15 +129,31 @@
 				<div class="col-sm-6">
 					<div class="total_area" style="border: 1px solid #E6E4DF; padding: 32px 25px 10px 2px">
 						<ul style="margin-bottom: 30px">
-							<li>Tổng tiền <span>{{Cart::subtotal().''.'VND'}}</span></li>
+							<li>Tổng tiền <span>{{Cart::priceTotal(0,',','.').''.'VND'}}</span></li>
 							{{-- <li>Thuế <span>{{Cart::tax().''.'VND'}}</span></li> --}}
-                            <li>Thuế <span>0 VND</span></li>
+                            <li>Thuế <span>{{Cart::tax(0,',','.').''.'VND'}}</span></li>
 							<li>Phí vận chuyển <span>Free</span></li>
 							{{-- <li>Thành tiền <span>{{Cart::total().''.'VND'}}</span></li> --}}
-                            <li>Thành tiền <span>{{Cart::subtotal().''.'VND'}}</span></li>
+                            <li>Thành tiền <span>{{Cart::total(0,',','.').''.'VND'}}</span></li>
 						</ul>
-							<a class="btn btn-default update" href="">Update</a>
-							<a class="btn btn-default check_out" href="">Check Out</a>
+							{{-- <a class="btn btn-default update" href="">Cập nhật</a> --}}
+							<?php
+									$customer_id = Session::get('customer_id');
+									$shipping_id = Session::get('shipping_id');
+									if($customer_id==null && $shipping_id==null){
+										?>
+									<a class="btn btn-default check_out" href="{{URL::to('login-checkout')}}">Đăng nhập</a>
+									<?php
+									}elseif($customer_id!=null && $shipping_id==null) {
+									?>
+										<a class="btn btn-default check_out" href="{{URL::to('payment')}}">Điền thông tin nhận hàng</a>
+									<?php
+									} else {?>
+									<a class="btn btn-default check_out" href="{{URL::to('end-payment')}}">Thanh toán</a>
+									<?php
+									}
+									?>
+									
 					</div>
 				</div>
 			</div>

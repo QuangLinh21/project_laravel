@@ -2,20 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 //frontend
 Route::get('/', 'App\Http\Controllers\Homecontroller@index');
 Route::get('/trang-chu', 'App\Http\Controllers\Homecontroller@index');
+//tìm kiếm sp
+Route::post('/search', 'App\Http\Controllers\Homecontroller@search_product');
 
 //danh mục sp trang chủ
 Route::get('/category-product-user/{category_id}', 'App\Http\Controllers\CategoryProduct@show_category_user');
@@ -64,3 +56,15 @@ Route::post('/update-product/{product_id}', 'App\Http\Controllers\ProductControl
 Route::get('/delete-product/{product_id}', 'App\Http\Controllers\ProductController@remove_product');
 Route::get('/unactive-product/{product_id}', 'App\Http\Controllers\ProductController@unactive_product');
 Route::get('/active-product/{product_id}', 'App\Http\Controllers\ProductController@active_product');
+
+//checkout 
+Route::get('/login-checkout', 'App\Http\Controllers\CheckoutController@login_checkout');
+Route::post('/add-customer', 'App\Http\Controllers\CheckoutController@add_customer');
+Route::post('/login-customer', 'App\Http\Controllers\CheckoutController@login_customer');
+Route::get('/checkout', 'App\Http\Controllers\CheckoutController@checkout');
+
+//payment
+Route::get('/payment', 'App\Http\Controllers\CheckoutController@show_payment');
+Route::get('/end-payment', 'App\Http\Controllers\CheckoutController@end_payment');
+Route::post('/info-payment-product', 'App\Http\Controllers\CheckoutController@info_payment_product');
+Route::post('/order-product', 'App\Http\Controllers\CheckoutController@order_product');

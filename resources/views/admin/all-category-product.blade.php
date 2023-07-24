@@ -62,11 +62,11 @@
                             <?php
                             if ($cate_pro->category_status == 0) {
                             ?>
-                                <a href="{{URL::to('/unactive-category/'.$cate_pro->category_id)}}" class="text-success ">Ẩn</a>
+                                <a href="{{URL::to('unactive-category/'.$cate_pro->category_id)}}" class="text-success ">Ẩn</a>
                             <?php
                             } else {
                             ?>
-                                <a href="{{URL::to('/active-category/'.$cate_pro->category_id)}}" class="text-warning ">Hiển Thị</a>
+                                <a href="{{URL::to('active-category/'.$cate_pro->category_id)}}" class="text-warning ">Hiển Thị</a>
                             <?php
                             }
                             ?>
