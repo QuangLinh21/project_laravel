@@ -1,6 +1,8 @@
 @extends('welcome')
 @section('content')
-
+<?php
+echo Session::get('shipping_id');
+?>
     <div >
         <div class="breadcrumbs">
             <ol class="breadcrumb">
@@ -8,6 +10,21 @@
                 <li class="active">Thanh toán đơn hàng</li>
               </ol>
         </div><!--/breadcrums-->
+        <div class="review-payment">
+            <h2>Thông tin nhận hàng || <a class="btn btn-primary" href="{{URL::to('payment')}}" style=" margin-top:0px">Thêm thông tin nhận hàng</a></h2>
+            <ul>
+                @foreach($info_shipping as $key=>$value)
+                <li>
+                    <a href="{{URL::to('delete-address-ship/'.$value->shipping_id)}}" class="active" ui-toggle-class="" onclick="return confirm('Bạn có muốn xóa danh mục này không?')"><i class="fa fa-times text-danger text"></i></a>
+                    <input type="radio" name="chose_adress_shipping" value="{{$value->shipping_id}}" id=""><span>{{$value->customer_name}}</span>&nbsp;<span>sdt: {{$value->ship_customer_phone}}</span>&nbsp;<span>Địa chỉ: {{$value->ship_customer_address}}
+                    </span>&nbsp; 
+                </li>
+           
+            @endforeach
+            </ul>
+      
+        
+        </div>
         <div class="review-payment">
             <h2>Danh sách sản phẩm</h2>
         </div>
@@ -103,7 +120,19 @@
                 <span>
                     <label><input name="payment_option" value="2" type="checkbox"> Thanh toán trực tiếp</label>
                 </span>
-                <input type="submit" value="Đặt hàng" style=" margin-top:0px" class="btn btn-primary check_out">
+                <?php
+									$shipping_id = Session::get('shipping_id');
+									if($shipping_id==null){
+										?>
+									<a class="btn btn-default check_out" href="{{URL::to('payment')}}">Điền thông tin nhận hàng</a>
+									<?php
+									}else {?>
+									 <input type="submit" value="Đặt hàng" style=" margin-top:0px" class="btn btn-primary check_out">
+									<?php
+									}
+									?>
+
+               
               </form>
             </div>
     </div>

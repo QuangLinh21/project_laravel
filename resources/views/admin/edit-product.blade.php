@@ -24,12 +24,12 @@
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
-                            <input type="text" class="form-control" value="{{$pro->product_name}}" name="product_name" id="exampleInputEmail1" placeholder="Tên sản phẩm">
+                            <input type="text" class="form-control" value="{{$pro->product_name}}" name="product_name" id="exampleInputEmail1" placeholder="Tên sản phẩm" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail2">Danh mục sản phẩm</label>
                             
-                            <select name="cate_product" class="form-control" id="exampleInputEmail2">
+                            <select name="cate_product" class="form-control" id="exampleInputEmail2" >
                             @foreach($cate_product as $key =>$cate)     
                             @if($cate->category_id==$pro->category_id)  
                             <option selected value="{{$cate->category_id}}">{{$cate->category_name}}</option>
@@ -54,11 +54,11 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword6">Mô tả sản phẩm</label>
-                            <textarea class="form-control" name="product_desc"  id="exampleInputPassword6" placeholder="Mô tả thương hiệu">{{$pro->product_desc}}</textarea>
+                            <textarea class="form-control" name="product_desc" required  id="ckeditor1" placeholder="Mô tả thương hiệu">{{$pro->product_desc}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail5">Giá sản phẩm</label>
-                            <input type="number" class="form-control" value="{{$pro->product_price}}"  name="product_price" id="exampleInputEmail5" >
+                            <input type="number" data-validation="number" required data-validation-error-msg="hãy điền số" class="form-control" value="{{$pro->product_price}}"  name="product_price" id="exampleInputEmail5" >
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail4">Hình ảnh sản phẩm</label>

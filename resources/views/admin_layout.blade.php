@@ -116,6 +116,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</li>
 						<li class="sub-menu">
 							<a href="javascript:;">
+								<i class="fa-brands fa-product-hunt"></i>
+								<span>Đơn hàng</span>
+							</a>
+							<ul class="sub">
+								<li><a href="{{URL::to('/manager-order')}}">Quản lý đơn hàng</a></li>
+								<li><a href="{{URL::to('/all-product')}}">Danh sách sản phẩm</a></li>
+
+							</ul>
+						</li>
+						<li class="sub-menu">
+							<a href="javascript:;">
 								<i class="fa fa-book"></i>
 								<span>Danh mục sản phẩm</span>
 							</a>
@@ -171,6 +182,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 	<script src="{{asset('../public/backend/js/jquery.scrollTo.js')}}"></script>
 	<!-- morris JavaScript -->
+	<script src="{{asset('../public/backend/ckeditor5-build-classic/ckeditor.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/formValidation.min.js"></script> 
+	<script>
+		ClassicEditor
+		.create(document.querySelector('#ckeditor1'))
+		.catch(error=>{
+			console.error(error);
+		})
+
+	</script>
+	<script>
+		$.validate({
+			
+		})
+	</script>
 	<script>
 		$(document).ready(function() {
 			//BOX BUTTON SHOW AND CLOSE

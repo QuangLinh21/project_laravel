@@ -16,3 +16,15 @@ câu lệnh tạo csdl: php artisan make:migration tenfilecsdl --create=tbl_admi
 câu lệnh : php artisan migrate để tạo bảng
 câu leennhj quay lại:  php artisan migrate:rollback
 
+6. import các extendsion 
+    6.1 ckeditor 
+    6.2 form validation jquery
+
+7. MVC 
+    7.1 Model : Database 
+    7.2 View : Hiển thị 
+    7.3 Controller : kết nối logic giữa Model và view 
+
+8. Chuyển controller sang model 
+    8.1 câu lệnh tạo model : php artisan make:model tenmodel 
+    

@@ -45,21 +45,26 @@
     <div class="col-sm-7">
         <div class="product-information"><!--/product-information-->
             <img src="images/product-details/new.jpg" class="newarrival" alt="" />
-            <h2>{{$item->product_name}}</h2>
-            <p>Product ID: {{$item->product_id}}</p>
-            <img src="images/product-details/rating.png" alt="" />
-            <form action="{{URL::to('save-cart')}}" method="post">
-                {{csrf_field()}}
-            <span>
-                <span>{{ number_format($item->product_price).' '.'VND' }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <br> 
-                <label>Quantity:</label>
-                <input type="number" name="quantity" min="1" value="1" />
-                <input type="hidden" name="product_id_hidden"  value="{{$item->product_id}}" />
-                <button type="submit" class="btn btn-fefault cart">
-                    <i class="fa fa-shopping-cart"></i>
-                    Thêm vào giỏ hàng
-                </button>
-            </span>
+            <form >
+                @csrf
+                <input type="hidden" value="{{$item->product_id}}" class="cart_product_id_{{$item->product_id}}">
+                <input type="hidden" value="{{$item->product_name}}" class="cart_product_name_{{$item->product_id}}">
+                <input type="hidden" value="{{$item->product_image}}" class="cart_product_image_{{$item->product_id}}">
+                <input type="hidden" value="{{$item->product_price}}" class="cart_product_price_{{$item->product_id}}">
+                <input type="hidden" value="1" class="cart_product_qty_{{$item->product_id}}">
+                    <h2>{{$item->product_name}}</h2>
+                    <p>Product ID: {{$item->product_id}}</p>
+                    <img src="images/product-details/rating.png" alt="" />
+                <span>
+                    <span>{{ number_format($item->product_price).' '.'VND' }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <br> 
+                    <label>Quantity:</label>
+                    <input type="number" name="quantity" min="1" value="1" />
+                    {{-- <input type="hidden" name="product_id_hidden"  value="{{$item->product_id}}" /> --}}
+                    <button type="button" class="btn btn-fefault cart add-to-cart" data-id_product="{{$item->product_id}}" name="add-to-cart">
+                        <i class="fa fa-shopping-cart"></i>
+                        Thêm vào giỏ hàng
+                    </button>
+                </span>
            </form>
             <p><b>Tình trạng:</b>còn hàng</p>
             <p><b>Điều kiện:</b>Mới 100%</p>

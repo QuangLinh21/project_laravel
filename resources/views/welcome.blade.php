@@ -3,16 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Home | E-Shopper</title>
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+	{{-- <meta name='keywords' content="{{$meta_keyword}}" /> --}}
+	<meta name='keywords' content="ql shop, ql shop, ql shop, ql shop" />
+    {{-- <meta name="description" content="{{$meta_desc}}"> --}}
+    <meta name="description" content="Cửa hàng bán lẻ điện thoại, máy tính laptop, smartwatch, smarthome, thiết bị IT, phụ kiện chính hãng - Giá tốt, trả góp 0%, giao miễn phí">
+    <meta name="author" content="QLN">
+	{{-- <link rel="canonical" href="{{$url_canonical}}" /> --}}
+	<link rel="canonical" href="http://localhost:88/applaravel/public/" />
+    {{-- <title>{{$meta_title}}</title> --}}
+	<title>Cửa hàng bán lẻ điện thoại, máy tính laptop, smartwatch, smarthome, thiết bị IT, phụ kiện chính hãng - Giá tốt, trả góp 0%, giao miễn phí</title>
     <link href="{{asset('../public/frontend/css/bootstrap.min.css')}}"  rel="stylesheet">
     <link href="{{asset('../public/frontend/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('../public/frontend/css/prettyPhoto.css')}}" rel="stylesheet">
-    <link href="{{asset('../public/frontend/css/price-range.css')}}" rel="stylesheet">
+    <link href="{{asset('../public/frontend/css /price-range.css')}}" rel="stylesheet">
     <link href="{{asset('../public/frontend/css/animate.css')}}" rel="stylesheet">
 	<link href="{{asset('../public/frontend/css/main.css')}}" rel="stylesheet">
 	<link href="{{asset('../public/frontend/css/responsive.css')}}" rel="stylesheet">
+	<link href="{{asset('../public/frontend/css/sweetalert.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -25,7 +33,10 @@
 </head><!--/head-->
 
 <body>
-	
+	<?php
+	   echo	Session::get('customer_id');
+	?>
+
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -90,19 +101,17 @@
 								<li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li>
 								<?php
 									$customer_id = Session::get('customer_id');
-									$shipping_id = Session::get('shipping_id');
 									if($customer_id==null){
 										?>
 									<li><a href="{{URL::to('login-checkout')}}"><i class="fa fa-lock"></i>Thanh toán</a></li>
 									<?php
-									} else {
-									?>
-										<li><a href="{{URL::to('end-payment')}}"><i class="fa fa-crosshairs"></i>Thanh toán</a></li>
+									}else {?>
+									<li><a class="btn btn-default check_out" href="{{URL::to('end-payment')}}">Thanh toán</a></li>
 									<?php
 									}
 									?>
 								
-								<li><a href="{{URL::to('cart-product')}}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+								<li><a href="{{URL::to('giohang')}}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
 								<?php
 									$customer_id = Session::get('customer_id');
 									if($customer_id==null){
@@ -455,5 +464,43 @@
 	<script src="{{asset('../public/frontend/js/price-range.js')}}"></script>
     <script src="{{asset('../public/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('../public/frontend/js/main.js')}}"></script>
+    <script src="{{asset('../public/frontend/js/jquery.js')}}"></script>
+    <script src="{{asset('../public/frontend/js/sweetalert.js')}}"></script>
+
+	
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $('.add-to-cart').click(function(){
+                var id = $(this).data('id_product');
+                var cart_product_id = $('.cart_product_id_' + id).val();
+                var cart_product_name = $('.cart_product_name_' + id).val();
+                var cart_product_image = $('.cart_product_image_' + id).val();
+                var cart_product_price = $('.cart_product_price_' + id).val();
+                var cart_product_qty = $('.cart_product_qty_' + id).val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: '{{url('/add-cart-ajax')}}',
+                    method: 'POST',
+                    data:{cart_product_id:cart_product_id,cart_product_name:cart_product_name,cart_product_image:cart_product_image,cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,_token:_token},
+                    success:function(data){
+						swal({
+							title: "Đã thêm sản phẩm vào giỏ hàng",
+                                text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                                showCancelButton: true,
+                                cancelButtonText: "Xem tiếp",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Đi đến giỏ hàng",
+                                closeOnConfirm: false
+
+							},
+							function(){
+								window.location.href = "{{url('/giohang')}}";
+							});
+
+		 			}
+				})
+		 	})
+		 });
+	</script>
 </body>
 </html>

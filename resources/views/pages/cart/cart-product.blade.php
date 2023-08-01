@@ -8,7 +8,8 @@
               <li class="active">Giỏ hàng</li>
             </ol>
         </div>
-        <div class="table-responsive cart_info">
+         
+		<div class="table-responsive cart_info">
             <?php
                 $content = Cart::content();
                 // print_r($content);
@@ -139,16 +140,11 @@
 							{{-- <a class="btn btn-default update" href="">Cập nhật</a> --}}
 							<?php
 									$customer_id = Session::get('customer_id');
-									$shipping_id = Session::get('shipping_id');
-									if($customer_id==null && $shipping_id==null){
+									if($customer_id==null){
 										?>
 									<a class="btn btn-default check_out" href="{{URL::to('login-checkout')}}">Đăng nhập</a>
 									<?php
-									}elseif($customer_id!=null && $shipping_id==null) {
-									?>
-										<a class="btn btn-default check_out" href="{{URL::to('payment')}}">Điền thông tin nhận hàng</a>
-									<?php
-									} else {?>
+								} else {?>
 									<a class="btn btn-default check_out" href="{{URL::to('end-payment')}}">Thanh toán</a>
 									<?php
 									}

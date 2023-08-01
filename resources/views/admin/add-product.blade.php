@@ -23,7 +23,7 @@
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
-                            <input type="text" class="form-control" name="product_name" id="exampleInputEmail1" placeholder="Tên sản phẩm">
+                            <input type="text" id="ckeditor2" data-validation="length" data-validation-length="min10" data-validation-error-msg="không được để trống" class="form-control" name="product_name"  placeholder="Tên sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail2">Danh mục sản phẩm</label>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword6">Mô tả sản phẩm</label>
-                            <textarea class="form-control" name="product_desc" id="exampleInputPassword6" placeholder="Mô tả thương hiệu"></textarea>
+                            <textarea class="form-control" name="product_desc" id="ckeditor1" placeholder="Mô tả thương hiệu"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail5">Giá sản phẩm</label>

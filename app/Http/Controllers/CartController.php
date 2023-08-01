@@ -7,12 +7,55 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 use Cart;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 
 session_start();
 
 class CartController extends Controller
 {
+    public function giohang(Request $request){
+        $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->orderby('brand_id','desc')->get();
+        return view('pages.cart.cart-ajax')->with('category',$cate_product)->with('brand',$brand_product);
+    }
+    public function add_cart_ajax(Request $request){
+        $data = $request->all();
+        $session_id = substr(md5(microtime()),rand(0,26),5);
+        $cart = Session::get('cart'); //tạo session cart để kiểm tra
+        if($cart==true){
+            $is_avaiable = 0;
+            foreach($cart as $key=>$value){
+                if($value['product_id']==$data['cart_product_id']){
+                    $is_avaiable++;
+                }
+            }
+            if($is_avaiable == 0){
+                $cart[] = array(
+                    'session_id'=>$session_id,
+                    'product_id'=>$data['cart_product_id'],
+                    'product_name'=> $data['cart_product_name'],
+                    'product_image'=> $data['cart_product_image'],
+                    'product_price'=> $data['cart_product_price'],
+                    'product_qty'=> $data['cart_product_qty']
+                );
+                Session::put('cart', $cart);
+            }
+        }
+        else{
+            $cart[] = array(
+                'session_id'=>$session_id,
+                'product_id'=>$data['cart_product_id'],
+                'product_name'=> $data['cart_product_name'],
+                'product_image'=> $data['cart_product_image'],
+                'product_price'=> $data['cart_product_price'],
+                'product_qty'=> $data['cart_product_qty']
+            );
+        }
+        Session::put('cart', $cart);
+        Session::save();
+    }
+
     public function add_to_cart(Request $request){
         $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->orderby('brand_id','desc')->get();
@@ -30,6 +73,7 @@ class CartController extends Controller
         Cart::add($data);
         Cart::setGlobalTax(10);
         return Redirect::to('cart-product');
+        // Cart::destroy();
     }
     public function show_cart(){
         $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();

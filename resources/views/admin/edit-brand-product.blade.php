@@ -9,7 +9,7 @@
             <div class="panel-body">
                 @foreach($edit_brand as $key=>$edit_value)
                 <div class="position-center">
-                    <form role="form" action="{{URL::to('/update-brand-product/'.$edit_value->brand_id)}}" method="post">
+                    <form role="form" action="{{URL::to('update-brand-product/'.$edit_value->brand_id)}}" method="post">
                         {{csrf_field()}}
                    
                             
