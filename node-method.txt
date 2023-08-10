@@ -1,2 +1,15 @@
 trong laravel
 - limit() = take();
+
+
+--------------------clone git code laravel------------
+
+
+1. clone web
+2. composer update --no-scripts
+3. php artisan cache:clear 
+4. php artisan config:clear 
+5. copy pate file env.example đổi tên thành env 
+
+6. tạo database 
+7. php artisan migrate

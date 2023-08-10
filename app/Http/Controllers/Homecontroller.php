@@ -30,7 +30,7 @@ class Homecontroller extends Controller
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id')->get();
 
-        $show_blog = DB::table('tbl_blog')->where('quyen',0)->get();
+        $show_blog = DB::table('tbl_blog_new')->where('quyen',1)->get();
         // $manager_blog = view('pages.blog')->with('show_blog',$show_blog);
         return view('pages.blog')->with('category',$cate_product)->with('brand',$brand_product)->with('show_blog',$show_blog);
     }
@@ -49,14 +49,14 @@ class Homecontroller extends Controller
         $data['time']=$date['hours'].':'.$date['minutes'];
         $data['date']=$date['mday'].'/'.$date['mon'].'/'.$date['year'];
         $data['quyen']='1';
-        DB::table('tbl_blog')->insert($data);
+        DB::table('tbl_blog_new')->insert($data);
         Session::put('message','Gửi Blog thành công');
         return Redirect::to('add-blog');
     }
     public function read_blog($blog_id){
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id')->get();
-        $full_blog=DB::table('tbl_blog')->where('blog_id',$blog_id)->get();
+        $full_blog=DB::table('tbl_blog_new')->where('blog_id',$blog_id)->get();
         return view('pages.full-blog')->with('category',$cate_product)->with('brand',$brand_product)->with('full_blog',$full_blog);
     }
     //contact

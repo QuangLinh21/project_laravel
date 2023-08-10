@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TblBlog extends Migration
+class TblBlogNew extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class TblBlog extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_blog', function (Blueprint $table) {
+        Schema::create('tbl_blog_new', function (Blueprint $table) {
             $table->increments('blog_id');            
             $table->string('customer_name');            
             $table->string('customer_email');            
+            $table->string('title');            
             $table->text('content');            
             $table->string('time');  
             $table->string('date');
@@ -32,6 +33,6 @@ class TblBlog extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_blog');
+        Schema::dropIfExists('tbl_blog_new');
     }
 }
