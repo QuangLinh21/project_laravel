@@ -61,6 +61,7 @@
 
 .shipping img{
 	width: 100%;
+	
 }
 
 .slider.slider-horizontal{
@@ -125,6 +126,7 @@
 /* xs */
 @media (max-width: 767px) {
 
+
 .header_top .col-sm-6:first-child{
 	display: inline-block;
 	float: left;
@@ -139,6 +141,7 @@
 	display: inline-block;
 	overflow: inherit;
 	width: 100%;
+	height: auto;
 }
 
 .social-icons ul li a i {
@@ -523,5 +526,6 @@ ul.sub-menu{
 .product-information span span{
 	float: none;
 }
+
 
 }

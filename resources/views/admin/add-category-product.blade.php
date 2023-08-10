@@ -21,11 +21,11 @@
                             }
 
                             ?>
-                            <input type="text" class="form-control" name="category_product_name" id="exampleInputEmail1" placeholder="Tên danh mục">
+                            <input type="text" required="required" class="form-control" name="category_product_name" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả danh mục</label>
-                            <textarea class="form-control" name="category_product_desc" id="exampleInputPassword1" placeholder="Mô tả danh mục"></textarea>
+                            <textarea class="form-control" required="required" name="category_product_desc" id="exampleInputPassword1" placeholder="Mô tả danh mục"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Hiển thị</label>

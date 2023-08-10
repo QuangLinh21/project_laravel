@@ -3,7 +3,7 @@
 <div class="table-agile-info">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Danh mục sản phẩm
+            Danh sách đơn hàng
         </div>
         <div class="row w3-res-tb">
             <div class="col-sm-5 m-b-xs">
@@ -38,8 +38,6 @@
             }
 
             ?>
-            <input class="form-control" id="myInput" type="text" placeholder="Search..">
-            <br>
             <table class="table table-striped b-t b-light">
                 <thead>
                     <tr>
@@ -48,36 +46,38 @@
                                 <input type="checkbox"><i></i>
                             </label>
                         </th>
-                        <th>Tên danh mục</th>
-                        <th>Hiển thị</th>
-                        <th>Mô tả</th>
+                        <th>ID hóa đơn</th>
+                        <th>ID khách</th>
+                        <th>ID ship</th>
+                        <th>ID sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>thành tiền</th>
+                        <th>SDT khách</th>
+                        <th>Địa chỉ khách</th>
+                        <th>Ghi chú khách</th>
                         <th colspan="2">Thao tác</th>
                     </tr>
                 </thead>
-                <tbody id="myTable">
-                    @foreach($all_category as $key=>$cate_pro)
+                <tbody>
+                    @foreach($all_order_detail as $key=>$order)
                     <tr>
                         <td><label class="i-checks m-b-none"><input type="checkbox"><i></i></label></td>
-                        <td>{{$cate_pro->category_name}}</td>
-                        <td>{{$cate_pro->category_desc}}</td>
+                        <td>{{$order->order_details_id}}</td>
+                        <td>{{$order->customer_id}}</td>
+                        <td>{{$order->shipping_id}}</td>
+                        <td>{{$order->product_id}}</td>
+                        <td>{{$order->product_name}}</td>
+                        <td>{{$order->product_quantity}}</td>
+                        <td>{{ number_format($order->order_total ,0,',','.')}}</td>
+                        <td>{{$order->ship_customer_phone}}</td>
+                        <td>{{$order->ship_customer_address}}</td>
+                        <td>{{$order->ship_customer_note}}</td>
                         <td>
-                            <?php
-                            if ($cate_pro->category_status == 0) {
-                            ?>
-                                <a href="{{URL::to('unactive-category/'.$cate_pro->category_id)}}" class="text-success ">Ẩn</a>
-                            <?php
-                            } else {
-                            ?>
-                                <a href="{{URL::to('active-category/'.$cate_pro->category_id)}}" class="text-warning ">Hiển Thị</a>
-                            <?php
-                            }
-                            ?>
+                            <a href="{{URL::to('edit-order/'.$order->order_id)}}" class="active" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i></a>
                         </td>
                         <td>
-                            <a href="{{URL::to('edit-category-product/'.$cate_pro->category_id)}}" class="active" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i></a>
-                        </td>
-                        <td>
-                            <a href="{{URL::to('delete-category-product/'.$cate_pro->category_id)}}" class="active" ui-toggle-class="" onclick="return confirm('Bạn có muốn xóa danh mục này không?')"><i class="fa fa-times text-danger text"></i></a>
+                            <a href="{{URL::to('delete-order/'.$order->order_id)}}" class="active" ui-toggle-class="" onclick="return confirm('Bạn có muốn xóa danh mục này không?')"><i class="fa fa-times text-danger text"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -103,15 +103,5 @@
             </div>
         </footer>
     </div>
-    <script>
-        $(document).ready(function(){
-          $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-          });
-        });
-        </script>
 </div>
 @endsection

@@ -52,30 +52,30 @@ class PaymentController extends Controller
         $order_data['customer_id'] = Session::get('customer_id');
         $order_data['shipping_id'] = Session::get('shipping_id');
         $order_data['payment_id'] = $payment_id;
-        $order_data['order_total'] = Cart::total(0,',','.');
+        $order_data['order_total'] =strval(Session::get('total'));
         $order_data['order_status'] = 'Đang chờ xử lý';
         $order_id = DB::table('tbl_order')->insertGetId( $order_data );//insertGetId để thêm vào và lấy luôn ra
 
         //insert order detail
-        $content = Cart::content();
-        foreach($content as $v_content){
+        // $content = Cart::content();
+        foreach(Session::get('cart') as $v_content){
             $order_details_data = array();
             $order_details_data['order_id'] = $order_id;
-            $order_details_data['product_id'] = $v_content->id;
-            $order_details_data['product_name'] = $v_content->name;
-            $order_details_data['product_price'] =$v_content->price;
-            $order_details_data['product_quantity'] = $v_content->qty;
+            $order_details_data['product_id'] = $v_content['cart_product_id'];
+            $order_details_data['product_name'] = $v_content['cart_product_name'];
+            $order_details_data['product_price'] =$v_content['cart_product_price'];
+            $order_details_data['product_quantity'] = $v_content['cart_product_qty'];
              DB::table('tbl_order_details')->insert($order_details_data);//insertGetId để thêm vào và lấy luôn ra
         }
         if($data['payment_method']==1){
-            Cart::destroy(); //reset giỏ hàng
+            Session::get('cart')::destroy(); //reset giỏ hàng
             echo 'thanh toán atm';
 
         }
         else{
             $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id')->get();
             $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id')->get();
-            Cart::destroy(); //reset giỏ hàng
+            Session::get('cart')::destroy(); //reset giỏ hàng
            return view('pages.login-checkout.shipcod')->with('category',$cate_product)->with('brand',$brand_product)->with('shipping_id',
            $shipping_id);
         }
@@ -84,7 +84,7 @@ class PaymentController extends Controller
     }
      //admin manager-order
      public function manager_order(){
-        $this->check_login();
+        
         $all_order = DB::table('tbl_order')
         ->join('tbl_customers','tbl_order.customer_id','=','tbl_customers.customer_id')
         ->select('tbl_order.*','tbl_customers.customer_name')

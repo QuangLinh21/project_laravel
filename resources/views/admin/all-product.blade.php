@@ -38,6 +38,8 @@
             }
 
             ?>
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <br>
             <table class="table table-striped b-t b-light">
                 <thead>
                     <tr>
@@ -57,7 +59,7 @@
                         <th colspan="2">Thao tác</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                     @foreach($all_product as $key=>$product)
                     <tr>
                         <td><label class="i-checks m-b-none"><input type="checkbox"><i></i></label></td>
@@ -111,5 +113,15 @@
             </div>
         </footer>
     </div>
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
 </div>
 @endsection

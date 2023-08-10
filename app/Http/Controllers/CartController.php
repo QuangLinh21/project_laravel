@@ -84,10 +84,57 @@ class CartController extends Controller
         Cart::update($rowId,0);
         return Redirect::to('cart-product');
     }
+    public function delete_product($session_id){
+        $cart = Session::get('cart');
+        if($cart==true){
+            foreach($cart as $key=>$val){
+                if($val['session_id']==$session_id) //nếu session_id của cart = $session_id truyền vào thì unset key vị trí của id sản phẩm đó trong giỏ hàng
+                {
+                    unset($cart[$key]);
+                }
+            }
+            Session::put('cart',$cart);
+            return Redirect()->back()->with('message','Cập nhật giỏ hàng thành công!');
+        }
+        else  {
+            return Redirect()->back()->with('message','Xóa sản phẩm không thành công');
+        }
+    }
+    public function delete_all_product(){
+        $cart=Session::get('cart');
+        if($cart==true){
+            Session::forget('cart');
+            return Redirect()->back()->with('message','Xóa sản phẩm không thành công');
+        }
+    }
     public function update_cart_quantity(Request $request){
         $rowId = $request->rowId_cart;
         $quantity = $request->cart_quantity;
         Cart::update($rowId,$quantity);
         return Redirect::to('cart-product');
+    }
+
+    public function update_cart(Request $request){
+        $data = $request->all();
+        $cart = Session::get('cart');
+        if($cart==true){
+            foreach($data['cart_qty'] as $key=>$qty){
+                foreach($cart as $session=>$val){
+                    if($val['session_id']==$key){
+                        $cart[$session]['product_qty']=$qty;
+                    }
+                }
+            }
+            Session::put('cart', $cart);
+            return Redirect()->back()->with('message','Cập nhật giỏ hàng thành công!');
+        }
+        else{
+            return Redirect()->back()->with('error','Cập nhật giỏ hàng không thành công!');
+        }
+    }
+    public function payment_end(){
+        $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->orderby('brand_id','desc')->get();
+        return view('pages.login-checkout.payment-end')->with('category',$cate_product)->with('brand',$brand_product);
     }
 }

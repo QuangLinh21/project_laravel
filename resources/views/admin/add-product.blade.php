@@ -19,11 +19,12 @@
                     }
 
                     ?>
+                    
                     <form role="form" action="{{URL::to('/save-product')}}" method="post" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
-                            <input type="text" id="ckeditor2" data-validation="length" data-validation-length="min10" data-validation-error-msg="không được để trống" class="form-control" name="product_name"  placeholder="Tên sản phẩm">
+                            <input type="text" id="ckeditor2" required="required" data-validation="length" data-validation-length="min10" data-validation-error-msg="không được để trống" class="form-control" name="product_name"  placeholder="Tên sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail2">Danh mục sản phẩm</label>
@@ -37,7 +38,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail3">Thương hiệu sản phẩm</label>
                             
-                            <select name="brand_product" class="form-control" id="exampleInputEmail3">
+                            <select name="brand_product"  class="form-control" id="exampleInputEmail3">
                             @foreach($brand_product as $key =>$brand)    
                             <option value="{{$brand->brand_id}}">{{$brand->brand_name}}</option>
                             @endforeach
@@ -45,19 +46,19 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword6">Mô tả sản phẩm</label>
-                            <textarea class="form-control" name="product_desc" id="ckeditor1" placeholder="Mô tả thương hiệu"></textarea>
+                            <textarea class="form-control" required="required" name="product_desc" id="ckeditor1" placeholder="Mô tả thương hiệu"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail5">Giá sản phẩm</label>
-                            <input type="number" class="form-control" name="product_price" id="exampleInputEmail5" placeholder="Tên sản phẩm">
+                            <input type="number" required="required" class="form-control" name="product_price" id="exampleInputEmail5" placeholder="Tên sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail4">Hình ảnh sản phẩm</label>
-                            <input type="file" class="form-control" name="product_image" id="exampleInputEmail4" >
+                            <input type="file" required="required" class="form-control" name="product_image" id="exampleInputEmail4" >
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">trạng thái</label>
-                            <select class="form-control input-sm m-bot15" name="product_status">
+                            <select class="form-control input-sm m-bot15" required="required" name="product_status">
                                 <option value="0">Ẩn</option>
                                 <option value="1">Hiển thị</option>
                             </select>

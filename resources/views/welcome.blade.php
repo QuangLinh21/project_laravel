@@ -33,10 +33,6 @@
 </head><!--/head-->
 
 <body>
-	<?php
-	   echo	Session::get('customer_id');
-	?>
-
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -146,22 +142,10 @@
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="{{URL::to('/trang-chu')}}" class="active">TRANG CHỦ</a></li>
-								<li class="dropdown"><a href="#">SẢN PHẨM<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">SẢN PHẨM</a></li>
-										<li><a href="product-details.html">Product Details</a></li> 
-										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
-                                    </ul>
+								<li class="dropdown"><a href="{{URL::to('/list-product')}}">SẢN PHẨM</a>
                                 </li> 
-								<li class="dropdown"><a href="#">TIN TỨC<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-                                    </ul>
-                                </li> 
-								<li><a href="404.html">LIÊN HỆ</a></li>
-								<li><a href="contact-us.html">GIỎ HÀNG</a></li>
+								<li class="dropdown"><a href="{{URL::to('/blog')}}">TIN TỨC</a></li> 
+								<li><a href="{{URL::to('/contact')}}">LIÊN HỆ</a></li>
 							</ul>
 						</div>
 					</div>
@@ -169,7 +153,7 @@
 						<div class="search_box pull-right">
 							<form action="{{URL::to('search')}}" method="POST">
 								{{ csrf_field() }}
-								<input type="text" name="keyword_product" placeholder="Tìm kiếm ..."/>
+								<input type="text" name="keyword_product"  placeholder="Tìm kiếm ..."/>
 								<input type="submit" class="btn btn-primary btn-sm" style="width:80px; margin-top:0px; color:black" value="Tìm kiếm">
 							</form>
 						</div>
@@ -193,7 +177,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-6">
-									<h1><span>E</span>-SHOPPER</h1>
+									<h1><span>QL</span>-SHOPP</h1>
 									<h2>Free E-Commerce Template</h2>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
 									<button type="button" class="btn btn-default get">Get it now</button>
@@ -231,7 +215,6 @@
 							</div>
 							
 						</div>
-						
 						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
 							<i class="fa fa-angle-left"></i>
 						</a>
@@ -273,9 +256,7 @@
 							</div>
 						</div>
 						
-						<div class="shipping text-center"><!--shipping-->
-							<img src="images/home/shipping.jpg" alt="" />
-						</div><!--/shipping-->
+					
 					
 					</div>
 				</div>
@@ -313,14 +294,14 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="{{('../public/frontend/images/iframe1.png ')}}" alt="" />
+										<img src="{{('../public/frontend/images/bn3.png')}}" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
 									</div>
 								</a>
 								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
+								<h2>20 DEC 2023</h2>
 							</div>
 						</div>
 						
@@ -328,14 +309,14 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="{{('../public/frontend/images/iframe2.png ')}}" alt="" />
+										<img src="{{('../public/frontend/images/bn2.png  ')}}" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
 									</div>
 								</a>
 								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
+								<h2>20 DEC 2023</h2>
 							</div>
 						</div>
 						
@@ -343,14 +324,14 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src=" {{('../public/frontend/images/iframe3.png')}}" alt="" />
+										<img src=" {{('../public/frontend/images/bn3.png ')}}" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
 									</div>
 								</a>
 								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
+								<h2>20 DEC 2023</h2>
 							</div>
 						</div>
 						
@@ -358,14 +339,14 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="{{('../public/frontend/images/iframe4.png ')}}" alt="" />
+										<img src="{{('../public/frontend/images/bn1.png ')}}" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
 									</div>
 								</a>
 								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
+								<h2>20 DEC 2023</h2>
 							</div>
 						</div>
 					</div>
@@ -466,8 +447,22 @@
     <script src="{{asset('../public/frontend/js/main.js')}}"></script>
     <script src="{{asset('../public/frontend/js/jquery.js')}}"></script>
     <script src="{{asset('../public/frontend/js/sweetalert.js')}}"></script>
-
+	<script src="{{asset('../public/backend/ckeditor5-build-classic/ckeditor.js')}}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	
+	<script>
+		ClassicEditor
+		.create(document.querySelector('#ckeditor3'))
+		.catch(error=>{
+			console.error(error);
+		})
+
+	</script>
+	<script>
+		$.validate({
+			
+		})
+	</script>
 	<script type="text/javascript">
         $(document).ready(function(){
             $('.add-to-cart').click(function(){

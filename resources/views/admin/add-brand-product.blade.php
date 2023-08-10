@@ -24,11 +24,11 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục</label>
 
-                            <input type="text" class="form-control" name="brand_product_name" id="exampleInputEmail1" placeholder="Tên thương hiệu">
+                            <input type="text" class="form-control" required="required" name="brand_product_name" id="exampleInputEmail1" placeholder="Tên thương hiệu">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả thương hiệu</label>
-                            <textarea class="form-control" name="brand_product_desc" id="exampleInputPassword1" placeholder="Mô tả thương hiệu"></textarea>
+                            <textarea class="form-control" required="required" name="brand_product_desc" id="exampleInputPassword1" placeholder="Mô tả thương hiệu"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Hiển thị</label>

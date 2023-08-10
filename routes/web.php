@@ -3,15 +3,26 @@
 use Illuminate\Support\Facades\Route;
 
 
-//frontend
+//frontend -pages
 Route::get('/', 'App\Http\Controllers\Homecontroller@index');
 Route::get('/trang-chu', 'App\Http\Controllers\Homecontroller@index');
+Route::get('/list-product', 'App\Http\Controllers\Homecontroller@list_product');
+//blog
+Route::get('/blog', 'App\Http\Controllers\Homecontroller@show_blog');
+Route::get('/add-blog', 'App\Http\Controllers\Homecontroller@add_blog');
+Route::post('/send-blog', 'App\Http\Controllers\Homecontroller@send_blog');
+Route::get('/read-blog/{blog_id}', 'App\Http\Controllers\Homecontroller@read_blog');
+
+//contact
+Route::get('/contact', 'App\Http\Controllers\Homecontroller@show_contact');
+Route::post('/send-contact', 'App\Http\Controllers\Homecontroller@send_contact');
+
+
 //tìm kiếm sp
 Route::post('/search', 'App\Http\Controllers\Homecontroller@search_product');
 
 //danh mục sp trang chủ
 Route::get('/category-product-user/{category_id}', 'App\Http\Controllers\CategoryProduct@show_category_user');
-
 //thương hiệu sản phẩm
 Route::get('/brand-product-user/{category_id}', 'App\Http\Controllers\BrandProduct@show_brand_user');
 //chi tiet sp
@@ -22,7 +33,10 @@ Route::post('/add-cart-ajax', 'App\Http\Controllers\CartController@add_cart_ajax
 Route::get('/giohang', 'App\Http\Controllers\CartController@giohang');
 Route::get('/cart-product', 'App\Http\Controllers\CartController@show_cart');
 Route::get('/delete-to-cart/{rowId}', 'App\Http\Controllers\CartController@delete_to_cart');
+Route::get('/delete-product-cart/{session_id}', 'App\Http\Controllers\CartController@delete_product');
+Route::get('/delete-all-product', 'App\Http\Controllers\CartController@delete_all_product');
 Route::post('/update-cart-quantity', 'App\Http\Controllers\CartController@update_cart_quantity');
+Route::post('/update-cart', 'App\Http\Controllers\CartController@update_cart');
 
 //backend 
 Route::get('/admin', 'App\Http\Controllers\Admincontroller@index');
@@ -59,6 +73,9 @@ Route::post('/update-product/{product_id}', 'App\Http\Controllers\ProductControl
 Route::get('/delete-product/{product_id}', 'App\Http\Controllers\ProductController@remove_product');
 Route::get('/unactive-product/{product_id}', 'App\Http\Controllers\ProductController@unactive_product');
 Route::get('/active-product/{product_id}', 'App\Http\Controllers\ProductController@active_product');
+
+//order
+Route::get('/all-order-detail', 'App\Http\Controllers\Admincontroller@all_order_detail');
 
 //checkout 
 Route::get('/login-checkout', 'App\Http\Controllers\CheckoutController@login_checkout');
